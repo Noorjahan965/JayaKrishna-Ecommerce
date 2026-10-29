@@ -1,0 +1,48 @@
+/* =====================================================================
+   THEME: the sister website's tokens, verbatim (block 1).
+   Block 2 maps them onto the names this project's components use.
+   To re-theme, edit block 1 only.
+   ===================================================================== */
+:root {
+  /* 1. Shared brand tokens (same as the sister site) */
+  --brown: #4a1c08; --brown-deep: #3f1706; --rust: #7c3a12;
+  --amber: #d97706; --amber-dark: #b45309; --orange-accent: #c2610c;
+  --gold: #fde68a; --gold-bright: #fcd34d;
+  --cream: #faf6f0; --card: #fffdf3; --page: #fffdf9;
+  --line: #fde9a8; --chip: #fff0bd;
+  --ink: #2b1a10; --muted: #6b6560;
+  --success-bg: #dcfce7; --success: #166534; --danger: #dc2626;
+  --font-head: "Playfair Display", Georgia, serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+
+  /* 2. Mapping used by this project's components */
+  --brand-900: var(--brown-deep);
+  --brand-800: var(--brown);
+  --brand-700: var(--rust);
+  --brand-600: var(--amber-dark);
+  --brand-500: var(--orange-accent);
+
+  --accent-500: var(--gold-bright);
+  --accent-300: var(--gold);
+  --accent-100: var(--chip);
+
+  --bg: var(--page);
+  --surface: var(--card);
+  --surface-warm: var(--cream);
+  --border: var(--line);
+  --ink-soft: #4d3f36;
+  --ink-faint: var(--muted);
+
+  --ok: var(--success);
+  --ok-bg: var(--success-bg);
+  --danger-bg: #fef2f2;
+
+  --font-heading: var(--font-head);
+
+  /* Shape */
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 6px 24px rgba(74, 28, 8, 0.12);
+  --shadow-sm: 0 2px 8px rgba(74, 28, 8, 0.08);
+  --container: 1180px;
+}
