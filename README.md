@@ -27,7 +27,7 @@ Suggested MySQL tables: `users(role: customer|dealer|supplier|admin, status)`, `
 Suggested extras: `bcrypt`, `jsonwebtoken` or `express-session`, `zod`, `mysql2` (or Prisma), `multer` (quotation uploads), a payment gateway SDK.
 
 ## Theme
-Edit **`src/styles/theme.css`** only. Block 1 holds the sister website's tokens verbatim (Playfair Display headings, Plus Jakarta Sans body, loaded from Google Fonts in `index.html`); block 2 maps them to this project's variable names.
+Edit **`src/styles/theme.css`** only. Block 1 holds the brand tokens (client palette: primary red `#B90E0A`, secondary cream `#F5F0E6`; fonts Playfair Display + Plus Jakarta Sans, loaded from Google Fonts in `index.html`); block 2 maps them to this project's variable names.
 
 ## Content still needed from the client (marked `TODO(client)` in code)
 Phone / WhatsApp number (`data/site.js`) · prices (`data/products.js`) · real pack photos (`components/BagArt.jsx`) · team, awards, CSR, annual report, careers, facility photos · brand video URL (`pages/Info.jsx`) · Terms, Privacy and Return policy text (`pages/Policies.jsx`) · logo (header uses a text mark).

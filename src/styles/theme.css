@@ -1,36 +1,41 @@
 /* =====================================================================
-   THEME: the sister website's tokens, verbatim (block 1).
-   Block 2 maps them onto the names this project's components use.
-   To re-theme, edit block 1 only.
+   THEME. Edit block 1 only; block 2 maps it onto the names the
+   components use.
+   Client palette (Oct 2026): primary red #B90E0A, secondary cream #F5F0E6.
+   Fonts are unchanged (Playfair Display + Plus Jakarta Sans).
    ===================================================================== */
 :root {
-  /* 1. Shared brand tokens (same as the sister site) */
-  --brown: #4a1c08; --brown-deep: #3f1706; --rust: #7c3a12;
-  --amber: #d97706; --amber-dark: #b45309; --orange-accent: #c2610c;
-  --gold: #fde68a; --gold-bright: #fcd34d;
-  --cream: #faf6f0; --card: #fffdf3; --page: #fffdf9;
-  --line: #fde9a8; --chip: #fff0bd;
-  --ink: #2b1a10; --muted: #6b6560;
+  /* 1. Brand tokens */
+  --primary: #B90E0A;        /* client primary */
+  --secondary: #F5F0E6;      /* client secondary */
+  --primary-light: #c8201b;  /* gradient end, small accents on light */
+  --primary-deep: #c1110e;   /* headings, hover */
+  --primary-night: #750806f2;  /* top bar, footer */
+  --secondary-deep: #e6dccb; /* borders on cream */
+  --page: #F5F0E6;
+  --card: #f3e8ca;
+  --ink: #2a1d1b; --muted: #6b6560;
   --success-bg: #dcfce7; --success: #166534; --danger: #dc2626;
   --font-head: "Playfair Display", Georgia, serif;
   --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
 
   /* 2. Mapping used by this project's components */
-  --brand-900: var(--brown-deep);
-  --brand-800: var(--brown);
-  --brand-700: var(--rust);
-  --brand-600: var(--amber-dark);
-  --brand-500: var(--orange-accent);
+  --brand-900: var(--primary-night);
+  --brand-800: var(--primary-deep);
+  --brand-700: var(--primary);
+  --brand-600: var(--primary);
+  --brand-500: var(--primary-light);
 
-  --accent-500: var(--gold-bright);
-  --accent-300: var(--gold);
-  --accent-100: var(--chip);
+  /* "accent" = the cream secondary. Light-on-dark only (text/buttons on red). */
+  --accent-500: var(--secondary);
+  --accent-300: var(--secondary);
+  --accent-100: var(--secondary);
 
   --bg: var(--page);
   --surface: var(--card);
-  --surface-warm: var(--cream);
-  --border: var(--line);
-  --ink-soft: #4d3f36;
+  --surface-warm: var(--secondary);
+  --border: var(--secondary-deep);
+  --ink-soft: #4a3d3a;
   --ink-faint: var(--muted);
 
   --ok: var(--success);
@@ -42,7 +47,7 @@
   /* Shape */
   --radius: 14px;
   --radius-sm: 8px;
-  --shadow: 0 6px 24px rgba(74, 28, 8, 0.12);
-  --shadow-sm: 0 2px 8px rgba(74, 28, 8, 0.08);
+  --shadow: 0 6px 24px rgba(74, 5, 4, 0.12);
+  --shadow-sm: 0 2px 8px rgba(74, 5, 4, 0.08);
   --container: 1180px;
 }
