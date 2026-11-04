@@ -2,7 +2,6 @@
 // otherwise falls back to the SVG drawing below.
 const THEMES = {
 	Kili: { body: '#B90E0A', panel: '#F5F0E6', ink: '#6e0806', band: '#F5F0E6' },
-	Lion: { body: '#4a0504', panel: '#F5F0E6', ink: '#4a0504', band: '#F5F0E6' },
 };
 
 export default function BagArt({ brand = 'Kili', size, className, image, alt = '' }) {

@@ -45,7 +45,7 @@ export function DealerEnquiry() {
             ...base,
             { name: 'business', label: 'Business / shop name', required: true },
             { name: 'city', label: 'City / district', required: true },
-            { name: 'brand', label: 'Brand of interest', options: ['Kili Brand', 'Lion Brand', 'Both'] },
+            { name: 'brand', label: 'Brand of interest', options: ['Kili Brand'] },
             { name: 'volume', label: 'Expected monthly volume (kg)' },
             { name: 'message', label: 'Anything else we should know', type: 'textarea', full: true },
           ]}

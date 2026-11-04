@@ -22,14 +22,14 @@ export const roi = [
 ];
 
 export const onlineBenefits = [
-  { title: 'Direct From Mill Pricing', text: 'Cut out middleman margins. Get authentic mill-direct rates for both Kili and Lion brands.' },
+  { title: 'Direct From Mill Pricing', text: 'Cut out middleman margins. Get authentic mill-direct rates for both Kili brand.' },
   { title: 'Flexible Packaging Options', text: 'Available in 1kg, 5kg, 10kg, 25kg, and 50kg commercial polypropylene bags for easy handling.' },
-  { title: 'Fresh Batch Guarantee', text: 'Every online order is fulfilled directly from recent milling batches at Thirumangalam or Kappalur.' },
+  { title: 'Fresh Batch Guarantee', text: 'Every online order is fulfilled directly from recent milling batches at Thirumangalam.' },
   { title: 'Reliable Doorstep Logistics', text: 'Fast, hassle-free freight shipping for single bags or multi-ton commercial consignments.' },
 ];
 
 export const testimonials = [
-  { name: 'Madurai Hoteliers Association', role: 'Hospitality', quote: 'We switch between Kili and Lion brands based on stock availability from Thirumangalam and Kappalur. Both deliver identical, world-class soft paratas that our customers love!' },
+  { name: 'Madurai Hoteliers Association', role: 'Hospitality', quote: 'We switch between Kili brand based on stock availability from Thirumangalam. It delivers world-class soft paratas that our customers love!' },
   { name: 'Royal Bakery Chain', role: 'Commercial bakery', quote: "Our puffs and pastries expanded by 20% in puffiness without adding any dough improver. Jayakrishna Flour Mill's Maida is a game-changer for commercial bakers." },
   { name: 'Online Bulk Buyer', role: 'E-commerce client', quote: 'Ordering online direct from Jayakrishna Flour Mill saved us time and hassle. The flour quality is 100% consistent across every bag we receive!' },
 ];

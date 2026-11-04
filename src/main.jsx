@@ -12,45 +12,58 @@ import Cart from './pages/Cart';
 import { Login, Register } from './pages/Auth';
 import { About, AnnualReport, Awards, Career, Csr, Gallery, Infrastructure, NotFound, ProcessNutrition, Team, Testimonials, Video, WhyChooseUs } from './pages/Info';
 import { Contact, DealerEnquiry, SupplierRegistration } from './pages/Forms';
+import Checkout from './pages/Checkout';
+import Orders from './pages/Orders';
 import Policy from './pages/Policies';
+import { AdminLayout, AdminDashboard, AdminOrders, AdminOrderDetail, AdminCustomers } from './pages/Admin';
+import { AdminProducts } from './pages/AdminProducts';
+import { AdminMaster } from './pages/AdminMaster';
 
 createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <AuthProvider>
-        <CartProvider>
-          <Routes>
-            <Route element={<Layout />}>
-              <Route index element={<Home />} />
-              <Route path="about" element={<About />} />
-              <Route path="about/team" element={<Team />} />
-              <Route path="about/why-choose-us" element={<WhyChooseUs />} />
-              <Route path="about/awards" element={<Awards />} />
-              <Route path="video" element={<Video />} />
-              {/* Shop routes are self-contained so they can move to a separate shop URL (VITE_SHOP_URL). */}
-              <Route path="shop" element={<Catalogue />} />
-              <Route path="shop/:slug" element={<ProductDetail />} />
-              <Route path="cart" element={<Cart />} />
-              <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register />} />
-              <Route path="infrastructure" element={<Infrastructure />} />
-              <Route path="process-nutrition" element={<ProcessNutrition />} />
-              <Route path="gallery" element={<Gallery />} />
-              <Route path="testimonials" element={<Testimonials />} />
-              <Route path="policies/:slug" element={<Policy />} />
-              <Route path="contact" element={<Contact />} />
-              <Route path="career" element={<Career />} />
-              <Route path="dealer/enquiry" element={<DealerEnquiry />} />
-              <Route path="dealer/login" element={<Login role="dealer" />} />
-              <Route path="supplier/register" element={<SupplierRegistration />} />
-              <Route path="supplier/login" element={<Login role="supplier" />} />
-              <Route path="csr" element={<Csr />} />
-              <Route path="annual-report" element={<AnnualReport />} />
-              <Route path="*" element={<NotFound />} />
-            </Route>
-          </Routes>
-        </CartProvider>
-      </AuthProvider>
-    </BrowserRouter>
-  </React.StrictMode>
+	<React.StrictMode>
+		<BrowserRouter>
+			<AuthProvider>
+				<CartProvider>
+					<Routes>
+						<Route element={<Layout />}>
+							<Route index element={<Home />} />
+							<Route path="about" element={<About />} />
+							<Route path="about/team" element={<Team />} />
+							<Route path="about/why-choose-us" element={<WhyChooseUs />} />
+							<Route path="about/awards" element={<Awards />} />
+							<Route path="video" element={<Video />} />
+							{/* Shop routes are self-contained so they can move to a separate shop URL (VITE_SHOP_URL). */}
+							<Route path="shop" element={<Catalogue />} />
+							<Route path="shop/:slug" element={<ProductDetail />} />
+							<Route path="cart" element={<Cart />} />
+							<Route path="login" element={<Login />} />
+							<Route path="register" element={<Register />} />
+							<Route path="infrastructure" element={<Infrastructure />} />
+							<Route path="process-nutrition" element={<ProcessNutrition />} />
+							<Route path="gallery" element={<Gallery />} />
+							<Route path="testimonials" element={<Testimonials />} />
+							<Route path="policies/:slug" element={<Policy />} />
+							<Route path="contact" element={<Contact />} />
+							<Route path="career" element={<Career />} />
+							<Route path="dealer/enquiry" element={<DealerEnquiry />} />
+							<Route path="supplier/register" element={<SupplierRegistration />} />
+							<Route path="csr" element={<Csr />} />
+							<Route path="annual-report" element={<AnnualReport />} />
+							<Route path="checkout" element={<Checkout />} />
+							<Route path="orders" element={<Orders />} />
+							<Route path="admin" element={<AdminLayout />}>
+								<Route index element={<AdminDashboard />} />
+								<Route path="orders" element={<AdminOrders />} />
+								<Route path="orders/:id" element={<AdminOrderDetail />} />
+								<Route path="products" element={<AdminProducts />} />
+								<Route path="customers" element={<AdminCustomers />} />
+								<Route path="master" element={<AdminMaster />} />
+							</Route>
+							<Route path="*" element={<NotFound />} />
+						</Route>
+					</Routes>
+				</CartProvider>
+			</AuthProvider>
+		</BrowserRouter>
+	</React.StrictMode>
 );

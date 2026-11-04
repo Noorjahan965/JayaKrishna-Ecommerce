@@ -1,0 +1,75 @@
+CREATE TABLE IF NOT EXISTS users (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(190) NOT NULL UNIQUE,
+  phone VARCHAR(20) NULL,
+  password_hash VARCHAR(100) NOT NULL,
+  role ENUM('customer','admin') NOT NULL DEFAULT 'customer',
+  is_active TINYINT(1) NOT NULL DEFAULT 1,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS products (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  slug VARCHAR(120) NOT NULL UNIQUE,
+  name VARCHAR(150) NOT NULL,
+  brand VARCHAR(60) NOT NULL,
+  facility VARCHAR(150) NULL,
+  tagline VARCHAR(200) NULL,
+  description TEXT NULL,
+  image VARCHAR(255) NULL,
+  uses JSON NULL,
+  specs JSON NULL,
+  is_active TINYINT(1) NOT NULL DEFAULT 1,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS product_packs (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  product_id INT UNSIGNED NOT NULL,
+  size_kg INT UNSIGNED NOT NULL,
+  sku VARCHAR(40) NOT NULL,
+  price DECIMAL(10,2) NULL,
+  stock INT NOT NULL DEFAULT 0,
+  is_active TINYINT(1) NOT NULL DEFAULT 1,
+  UNIQUE KEY uq_pack (product_id, size_kg),
+  UNIQUE KEY uq_sku (sku),
+  FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS orders (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id INT UNSIGNED NOT NULL,
+  status ENUM('pending_payment','paid','packed','shipped','delivered','cancelled') NOT NULL DEFAULT 'pending_payment',
+  subtotal DECIMAL(10,2) NOT NULL,
+  shipping_fee DECIMAL(10,2) NOT NULL DEFAULT 0,
+  tax DECIMAL(10,2) NOT NULL DEFAULT 0,
+  total DECIMAL(10,2) NOT NULL,
+  ship_name VARCHAR(100) NOT NULL,
+  ship_phone VARCHAR(20) NOT NULL,
+  ship_line1 VARCHAR(200) NOT NULL,
+  ship_line2 VARCHAR(200) NULL,
+  ship_city VARCHAR(100) NOT NULL,
+  ship_state VARCHAR(100) NOT NULL,
+  ship_pincode VARCHAR(10) NOT NULL,
+  razorpay_order_id VARCHAR(64) NULL UNIQUE,
+  razorpay_payment_id VARCHAR(64) NULL,
+  paid_at TIMESTAMP NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_orders_user (user_id),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS order_items (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  order_id INT UNSIGNED NOT NULL,
+  pack_id INT UNSIGNED NOT NULL,
+  product_name VARCHAR(150) NOT NULL,
+  size_kg INT UNSIGNED NOT NULL,
+  sku VARCHAR(40) NOT NULL,
+  unit_price DECIMAL(10,2) NOT NULL,
+  qty INT UNSIGNED NOT NULL,
+  line_total DECIMAL(10,2) NOT NULL,
+  FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+  FOREIGN KEY (pack_id) REFERENCES product_packs(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
