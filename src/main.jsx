@@ -18,6 +18,7 @@ import Policy from './pages/Policies';
 import { AdminLayout, AdminDashboard, AdminOrders, AdminOrderDetail, AdminCustomers } from './pages/Admin';
 import { AdminProducts } from './pages/AdminProducts';
 import { AdminMaster } from './pages/AdminMaster';
+import { AdminCareers } from './pages/AdminCareers';
 
 createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
@@ -58,6 +59,7 @@ createRoot(document.getElementById('root')).render(
 								<Route path="products" element={<AdminProducts />} />
 								<Route path="customers" element={<AdminCustomers />} />
 								<Route path="master" element={<AdminMaster />} />
+								<Route path="careers" element={<AdminCareers />} />
 							</Route>
 							<Route path="*" element={<NotFound />} />
 						</Route>

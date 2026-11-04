@@ -13,6 +13,7 @@
 import { config } from "../config";
 import { products } from "../data/products";
 import { company } from "../data/site";
+import { jobs as staticJobs } from '../data/content';
 
 const wait = (value, ms = 80) =>
   new Promise((resolve) => setTimeout(() => resolve(value), ms));
@@ -175,4 +176,15 @@ export const adminApi = {
     http(`/api/admin/catalog/products/${id}/packs`, { method: "POST", body }),
   deletePack: (id) =>
     http(`/api/admin/catalog/packs/${id}`, { method: "DELETE" }),
+    jobs: () => http('/api/admin/careers/jobs'),
+  saveJob: (id, body) =>
+    id ? http(`/api/admin/careers/jobs/${id}`, { method: 'PATCH', body }) : http('/api/admin/careers/jobs', { method: 'POST', body }),
+  deleteJob: (id) => http(`/api/admin/careers/jobs/${id}`, { method: 'DELETE' }),
+  applications: () => http('/api/admin/careers/applications'),
+  setApplicationStatus: (id, status) => http(`/api/admin/careers/applications/${id}`, { method: 'PATCH', body: { status } }),
+};
+/* ---------------- Careers (public) ---------------- */
+export const careersApi = {
+  list: () => (config.useApi ? http('/api/careers') : wait(staticJobs)),
+  apply: (id, body) => http(`/api/careers/${id}/apply`, { method: 'POST', body }),
 };

@@ -85,6 +85,39 @@ await pool.query(
   `UPDATE products p JOIN categories c ON c.slug = 'rava' SET p.category_id = c.id
    WHERE p.category_id IS NULL AND p.slug LIKE '%rava%'`,
 );
+/* ---- Careers ---- */
+await pool.query(`CREATE TABLE IF NOT EXISTS job_openings (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(150) NOT NULL,
+  title_ta VARCHAR(150) NULL,
+  department VARCHAR(100) NULL,
+  location VARCHAR(100) NULL,
+  job_type ENUM('Full-time','Part-time','Contract','Internship') NOT NULL DEFAULT 'Full-time',
+  experience VARCHAR(50) NULL,
+  openings INT UNSIGNED NOT NULL DEFAULT 1,
+  salary VARCHAR(100) NULL,
+  overview TEXT NULL,
+  overview_ta TEXT NULL,
+  responsibilities TEXT NULL,
+  responsibilities_ta TEXT NULL,
+  requirements TEXT NULL,
+  requirements_ta TEXT NULL,
+  is_active TINYINT(1) NOT NULL DEFAULT 1,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`);
+
+await pool.query(`CREATE TABLE IF NOT EXISTS job_applications (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  job_id INT UNSIGNED NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(190) NOT NULL,
+  phone VARCHAR(20) NULL,
+  message TEXT NULL,
+  status ENUM('new','reviewed','shortlisted','rejected') NOT NULL DEFAULT 'new',
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_app_job (job_id),
+  FOREIGN KEY (job_id) REFERENCES job_openings(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`);
 
 console.log("Migration finished");
 await pool.end();

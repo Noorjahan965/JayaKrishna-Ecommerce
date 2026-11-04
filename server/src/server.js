@@ -9,6 +9,7 @@ import orderRoutes from './routes/orders.js';
 import adminRoutes from './routes/admin.js';
 import masterRoutes from './routes/master.js';
 import catalogRoutes from './routes/catalog.js';
+import { careersPublic, careersAdmin } from './routes/careers.js';
 
 const app = express();
 app.set('trust proxy', 1);
@@ -24,6 +25,8 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/admin/master', masterRoutes);
 app.use('/api/admin/catalog', catalogRoutes);
+app.use('/api/careers', careersPublic);
+app.use('/api/admin/careers', careersAdmin);
 
 app.use((_req, res) => res.status(404).json({ error: 'Not found' }));
 app.use((err, _req, res, _next) => {

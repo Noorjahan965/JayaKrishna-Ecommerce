@@ -44,6 +44,7 @@ export function AdminLayout() {
                         <NavLink to="/admin/master">Brands &amp; Categories</NavLink>
                         <NavLink to="/admin/products">Products &amp; Stock</NavLink>
                         <NavLink to="/admin/customers">Customers</NavLink>
+                        <NavLink to="/admin/careers">Careers</NavLink>
                     </nav>
                 </aside>
                 <main className="admin-main"><Outlet /></main>
