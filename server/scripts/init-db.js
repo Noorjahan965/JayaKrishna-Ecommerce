@@ -11,6 +11,7 @@ const conn = await mysql.createConnection({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   multipleStatements: true,
+  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : undefined,
 });
 await conn.query(`CREATE DATABASE IF NOT EXISTS \`${db}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`);
 await conn.query(`USE \`${db}\``);
