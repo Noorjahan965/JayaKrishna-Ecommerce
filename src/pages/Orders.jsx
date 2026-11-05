@@ -6,12 +6,12 @@ import { formatPrice } from '../data/products';
 import { EmptyState, Loading, Notice, PageHero, Section } from '../components/ui';
 
 const STATUS = {
-    pending_payment: 'Awaiting payment',
-    paid: 'Paid',
-    packed: 'Packed',
-    shipped: 'Shipped',
-    delivered: 'Delivered',
-    cancelled: 'Cancelled',
+  pending_payment: 'Awaiting payment',
+  paid: 'Placed',
+  packed: 'Confirmed',
+  shipped: 'Shipped',
+  delivered: 'Delivered',
+  cancelled: 'Cancelled',
 };
 
 export default function Orders() {

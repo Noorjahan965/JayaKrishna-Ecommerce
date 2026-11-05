@@ -7,12 +7,12 @@ import { formatPrice } from '../data/products';
 import { EmptyState, Loading, Notice, Section } from '../components/ui';
 
 const STATUS_LABEL = {
-    pending_payment: 'Awaiting payment',
-    paid: 'Paid',
-    packed: 'Packed',
-    shipped: 'Shipped',
-    delivered: 'Delivered',
-    cancelled: 'Cancelled',
+  pending_payment: 'Awaiting payment',
+  paid: 'Placed',
+  packed: 'Confirmed',
+  shipped: 'Shipped',
+  delivered: 'Delivered',
+  cancelled: 'Cancelled',
 };
 // Mirrors the server's rules. The server enforces them either way.
 const NEXT = {
@@ -23,8 +23,7 @@ const NEXT = {
     delivered: [],
     cancelled: [],
 };
-const ACTION = { packed: 'Mark as packed', shipped: 'Mark as shipped', delivered: 'Mark as delivered', cancelled: 'Cancel order' };
-const when = (d) => (d ? new Date(d).toLocaleString('en-IN') : '');
+const ACTION = { packed: 'Confirm order', shipped: 'Mark as shipped', delivered: 'Mark as delivered', cancelled: 'Cancel order' };const when = (d) => (d ? new Date(d).toLocaleString('en-IN') : '');
 
 /* ---------- Layout and guard ---------- */
 export function AdminLayout() {

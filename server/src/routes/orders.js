@@ -44,9 +44,9 @@ const orderSchema = z.object({
     state: z.string().trim().min(2).max(100),
     pincode: z
       .string()
-      .trim()
-      .regex(/^[1-9][0-9]{5}$/),
+      .trim(),
   }),
+  paymentMethod: z.enum(["online", "cod"]).default("online"),
 });
 
 // Marks an order paid exactly once and reduces stock. Safe to call twice
@@ -76,6 +76,32 @@ export async function markPaid(orderId, paymentId) {
   }
 }
 
+// Cash on delivery: the order is confirmed straight away and stock is reduced.
+// paid_at stays empty because nothing has been paid yet.
+async function placeCod(orderId) {
+  const conn = await pool.getConnection();
+  try {
+    await conn.beginTransaction();
+    const [r] = await conn.query(
+      `UPDATE orders SET status = 'paid' WHERE id = ? AND status = 'pending_payment'`,
+      [orderId],
+    );
+    if (r.affectedRows) {
+      await conn.query(
+        `UPDATE product_packs k JOIN order_items i ON i.pack_id = k.id
+         SET k.stock = GREATEST(k.stock - i.qty, 0) WHERE i.order_id = ?`,
+        [orderId],
+      );
+    }
+    await conn.commit();
+  } catch (err) {
+    await conn.rollback();
+    throw err;
+  } finally {
+    conn.release();
+  }
+}
+
 // Create an order (and a Razorpay order unless in mock mode). Prices come from the database only.
 router.post("/", async (req, res, next) => {
   const parsed = orderSchema.safeParse(req.body);
@@ -83,7 +109,7 @@ router.post("/", async (req, res, next) => {
     return res
       .status(400)
       .json({ error: "Please check your cart and delivery details" });
-  const { lines, address } = parsed.data;
+  const { lines, address, paymentMethod } = parsed.data;
 
   const merged = new Map(); // combine duplicate lines
   for (const l of lines) {
@@ -130,10 +156,11 @@ router.post("/", async (req, res, next) => {
 
     await conn.beginTransaction();
     const [o] = await conn.query(
-      `INSERT INTO orders (user_id, subtotal, total, ship_name, ship_phone, ship_line1, ship_line2, ship_city, ship_state, ship_pincode)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO orders (user_id, payment_method, subtotal, total, ship_name, ship_phone, ship_line1, ship_line2, ship_city, ship_state, ship_pincode)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         req.user.id,
+        paymentMethod,
         subtotalPaise / 100,
         totalPaise / 100,
         address.name,
@@ -162,6 +189,13 @@ router.post("/", async (req, res, next) => {
       );
     }
     await conn.commit();
+
+    if (paymentMethod === "cod") {
+      await placeCod(o.insertId);
+      return res
+        .status(201)
+        .json({ mode: "cod", orderId: o.insertId, amount: totalPaise, currency: "INR" });
+    }
 
     if (MOCK) {
       return res

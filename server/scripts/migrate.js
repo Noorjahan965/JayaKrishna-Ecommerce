@@ -119,5 +119,11 @@ await pool.query(`CREATE TABLE IF NOT EXISTS job_applications (
   FOREIGN KEY (job_id) REFERENCES job_openings(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`);
 
+/* ---- Payment method on orders ---- */
+if (!(await columnExists("orders", "payment_method"))) {
+  await pool.query(
+    "ALTER TABLE orders ADD COLUMN payment_method VARCHAR(10) NOT NULL DEFAULT 'online'",
+  );
+}
 console.log("Migration finished");
 await pool.end();

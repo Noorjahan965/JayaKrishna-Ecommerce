@@ -27,6 +27,7 @@ export default function Checkout() {
     const [busy, setBusy] = useState(false);
     const [err, setErr] = useState(null);
     const [doneId, setDoneId] = useState(null);
+    const [method, setMethod] = useState('cod');
     const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
 
     if (!ready || loading) return <Section><Loading /></Section>;
@@ -36,8 +37,7 @@ export default function Checkout() {
             <>
                 <PageHero title="Thank you!" crumb="Checkout" />
                 <Section>
-                    <Notice kind="ok">Your order #{doneId} has been placed and paid. <Link to="/orders">View my orders</Link></Notice>
-                </Section>
+                    <Notice kind="ok">Your order #{doneId} has been placed. You can pay in cash when it is delivered. <Link to="/orders">View my orders</Link></Notice>                </Section>
             </>
         );
     }
@@ -52,12 +52,15 @@ export default function Checkout() {
 
     const pay = async (e) => {
         e.preventDefault();
+        if (method !== 'cod') return;
         setBusy(true); setErr(null);
         try {
             const address = { ...form, line2: form.line2 || undefined };
-            const o = await ordersApi.place({ lines, address });
+            const o = await ordersApi.place({ lines, address, paymentMethod: 'cod' });
 
-            if (o.mode === 'mock') {
+            if (o.mode === 'cod') {
+                // Cash on delivery: nothing to pay now.
+            } else if (o.mode === 'mock') {
                 await ordersApi.mockPay(o.orderId);
             } else {
                 await loadRazorpay();
@@ -100,9 +103,23 @@ export default function Checkout() {
                         <label><span>Address line 2 (optional)</span><input value={form.line2} onChange={set('line2')} autoComplete="address-line2" /></label>
                         <label><span>City</span><input required value={form.city} onChange={set('city')} autoComplete="address-level2" /></label>
                         <label><span>State</span><input required value={form.state} onChange={set('state')} autoComplete="address-level1" /></label>
-                        <label><span>PIN code</span><input required pattern="[1-9][0-9]{5}" inputMode="numeric" value={form.pincode} onChange={set('pincode')} autoComplete="postal-code" /></label>
+                        <label><span>PIN code</span><input required inputMode="numeric" value={form.pincode} onChange={set('pincode')} autoComplete="postal-code" /></label>
+                                                <h3>Payment method</h3>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 12 }}>
+                            <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
+                                <input type="radio" name="method" checked={method === 'cod'} onChange={() => setMethod('cod')} />
+                                <span>Cash on Delivery</span>
+                            </label>
+                            <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
+                                <input type="radio" name="method" checked={method === 'online'} onChange={() => setMethod('online')} />
+                                <span>Online Payment</span>
+                            </label>
+                            {method === 'online' && (
+                                <p className="small muted">We are working on it. Online payment will be available soon. Please choose Cash on Delivery for now.</p>
+                            )}
+                        </div>
                         {err && <Notice kind="error">{err}</Notice>}
-                        <button className="btn btn-primary" disabled={busy}>{busy ? 'Processing…' : `Pay ${formatPrice(total)}`}</button>
+                        <button className="btn btn-primary" disabled={busy || method !== 'cod'}>{busy ? 'Processing…' : `Place order · ${formatPrice(total)}`}</button>
                     </form>
 
                     <aside className="cart-summary">
