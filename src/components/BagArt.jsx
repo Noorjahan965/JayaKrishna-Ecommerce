@@ -7,7 +7,7 @@ const THEMES = {
 export default function BagArt({ brand = 'Kili', size, className, image, alt = '' }) {
 	if (image) {
     const imageUrl = image.startsWith('/img/')
-        ? `/ecommerce${image}`
+        ? `/e-commerce${image}`
         : image;
 
     return (
