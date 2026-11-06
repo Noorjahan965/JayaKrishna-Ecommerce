@@ -6,7 +6,7 @@ export default function Footer() {
 		<footer className="site-footer">
 			<div className="container footer-grid">
 				<div>
-					<img src="/ecommerce/img/logo.png" alt="Jayakrishna – Quality lies in Consistency" className="footer-logo" />
+					<img src="/e-commerce/img/logo.png" alt="Jayakrishna – Quality lies in Consistency" className="footer-logo" />
 					<p>“{company.tagline}.” Pure, safe, and extraordinarily soft flour for your finest recipes.</p>
 					<p className="muted-on-dark">{company.address}</p>
 					<p><a href={`mailto:${company.email}`}>{company.email}</a></p>
