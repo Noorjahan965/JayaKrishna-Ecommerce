@@ -22,7 +22,7 @@ import { AdminCareers } from './pages/AdminCareers';
 
 createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
-		<BrowserRouter>
+		<BrowserRouter basename="/ecommerce">
 			<AuthProvider>
 				<CartProvider>
 					<Routes>
