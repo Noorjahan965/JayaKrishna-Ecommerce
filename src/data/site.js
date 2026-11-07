@@ -3,7 +3,7 @@ export const company = {
   name: "Jayakrishna Flour Mill",
   tagline: "Every grain matters to us",
   strapline: "Madurai's premier milling excellence | 100% unbleached & safe",
-  email: "Support@jayakrishnaflourmill.com",
+  email: "customercare@jayakrishna.org",
   // TODO(client): not in the guide. Fill in; the WhatsApp/Call buttons appear automatically once set.
   phone: "",
   whatsapp: "", // digits with country code, e.g. 919876543210
