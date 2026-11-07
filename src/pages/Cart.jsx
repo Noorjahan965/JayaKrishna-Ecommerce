@@ -11,7 +11,7 @@ import { EmptyState, Loading, Notice, PageHero, Section } from '../components/ui
 export default function Cart() {
 	useDocumentTitle('Your Cart');
 	const { user, ready } = useAuth();
-	const { lines, setQty, count } = useCart();
+	const { lines, setQty, remove, count } = useCart();
 	const location = useLocation();
 	const navigate = useNavigate();
 	const { data: products, loading } = useAsync(productsApi.list);
@@ -58,6 +58,7 @@ export default function Cart() {
 										<strong>{r.product?.name || r.slug}</strong>
 										<span className="muted"> · {r.size} kg pack</span>
 										<div className="small muted">{r.pack?.price != null ? formatPrice(r.pack.price) : 'Price on request'}</div>
+										<button type="button" onClick={() => remove(r.slug, r.size)} style={{ background: 'none', border: 0, padding: 0, marginTop: 4, color: '#b3261e', cursor: 'pointer', textDecoration: 'underline' }}>Remove</button>
 									</div>
 									<label className="qty">
 										<span className="sr">Quantity</span>

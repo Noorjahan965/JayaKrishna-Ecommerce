@@ -30,6 +30,7 @@ export function AuthProvider({ children }) {
   const logout = useCallback(async () => {
     await authApi.logout();
     setUser(null);
+    window.dispatchEvent(new Event('jk:logout'));
   }, []);
 
   /**

@@ -32,8 +32,19 @@ export function CartProvider({ children }) {
     );
   }, []);
 
-  const clear = useCallback(() => setLines([]), []);
+const remove = useCallback((slug, size) => {
+    setLines((prev) => prev.filter((l) => !(l.slug === slug && l.size === size)));
+  }, []);
+
+  // Empty the cart when someone signs out, so the next person on this browser starts fresh.
+  useEffect(() => {
+    const onLogout = () => setLines([]);
+    window.addEventListener('jk:logout', onLogout);
+    return () => window.removeEventListener('jk:logout', onLogout);
+  }, []);
+
+  const clear = useCallback(() => setLines([]), []);  
   const count = lines.reduce((n, l) => n + l.qty, 0);
-  const value = useMemo(() => ({ lines, add, setQty, clear, count }), [lines, add, setQty, clear, count]);
+  const value = useMemo(() => ({ lines, add, setQty, remove, clear, count }), [lines, add, setQty, remove, clear, count]);
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
