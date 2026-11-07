@@ -6,8 +6,19 @@ const THEMES = {
 
 export default function BagArt({ brand = 'Kili', size, className, image, alt = '' }) {
 	if (image) {
-		return <img src={image} alt={alt} className={className} decoding="async" />;
-	}
+    const imageUrl = image.startsWith('/img/')
+        ? `/e-commerce${image}`
+        : image;
+
+    return (
+        <img
+            src={imageUrl}
+            alt={alt}
+            className={className}
+            decoding="async"
+        />
+    );
+}
 	const t = THEMES[brand] || THEMES.Kili;
 	return (
 		<svg className={className} viewBox="0 0 240 300" role="img" aria-label={`${brand} Brand Maida ${size ? size + ' kg ' : ''}pack`}>

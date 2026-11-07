@@ -2,11 +2,11 @@
 // Items marked TODO(client) are sections the guide does not cover.
 
 export const specialties = [
-  { title: 'Soft Flaky Paratas', img: '/img/parata.jpg' },
-  { title: 'Fresh Sliced Breads', img: '/img/bread.jpg' },
-  { title: 'Soft Golden Buns', img: '/img/buns.jpg' },
-  { title: 'Flaky Puffs & Layered Pastries', img: '/img/pastry.jpg' },
-  { title: 'Traditional Plain Raw Vermicelli', img: '/img/vermicelli.jpg' },
+ { title: 'Soft Flaky Paratas', img: '/e-commerce/img/paratha.png' },
+{ title: 'Fresh Sliced Breads', img: '/e-commerce/img/bread.jpg' },
+{ title: 'Soft Golden Buns', img: '/e-commerce/img/buns.jpg' },
+{ title: 'Flaky Puffs & Layered Pastries', img: '/e-commerce/img/pastry.jpg' },
+{ title: 'Traditional Plain Raw Vermicelli', img: '/e-commerce/img/vermicelli.jpg' },
 ];
 
 export const advantages = [
@@ -36,11 +36,11 @@ export const testimonials = [
 
 export const gallery = [
   ...[
-    ['/img/parata.jpg', 'Soft flaky paratas'],
-    ['/img/bread.jpg', 'Fresh sliced bread'],
-    ['/img/buns.jpg', 'Soft golden buns'],
-    ['/img/pastry.jpg', 'Puffs and layered pastries'],
-    ['/img/vermicelli.jpg', 'Plain raw vermicelli strands'],
+    ['/e-commerce/img/paratha.png', 'Soft flaky paratas'],
+    ['/e-commerce/img/bread.jpg', 'Fresh sliced bread'],
+    ['/e-commerce/img/buns.jpg', 'Soft golden buns'],
+    ['/e-commerce/img/pastry.jpg', 'Puffs and layered pastries'],
+    ['/e-commerce/img/vermicelli.jpg', 'Plain raw vermicelli strands'],
   ].map(([src, alt]) => ({ src, alt })),
 ];
 // TODO(client): mill, packing and dispatch photos for Gallery and Infrastructure.

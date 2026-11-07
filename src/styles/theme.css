@@ -1,20 +1,23 @@
 /* =====================================================================
    THEME. Edit block 1 only; block 2 maps it onto the names the
    components use.
-   Client palette (Oct 2026): primary red #B90E0A, secondary cream #F5F0E6.
+   Palette: brown primary #7a4b06 (dark brown #3b2412), wheat-gold accent, cream #F5F0E6.
    Fonts are unchanged (Playfair Display + Plus Jakarta Sans).
    ===================================================================== */
 :root {
   /* 1. Brand tokens */
-  --primary: #B90E0A;        /* client primary */
+  --primary: #7a4b06;        /* brown (primary) */
   --secondary: #F5F0E6;      /* client secondary */
-  --primary-light: #c8201b;  /* gradient end, small accents on light */
-  --primary-deep: #c1110e;   /* headings, hover */
-  --primary-night: #750806f2;  /* top bar, footer */
-  --secondary-deep: #e6dccb; /* borders on cream */
+  --primary-light: #c98a12;  /* gradient end, small accents on light */
+  --primary-deep: #4f3004;   /* headings, hover */
+  --primary-night: #3b2412;  /* CTA band / notices (header + footer use the dark-brown tokens below) */
+  /* Dark brown header + footer */
+  --dbrown: #3b2412; --dbrown-2: #2b190b; --dbrown-3: #4a2f18;
+  --dgold: #f5c04a; --dtext: #f6ead2;
+  --secondary-deep: #e8d9b5; /* borders on cream */
   --page: #F5F0E6;
-  --card: #f3e8ca;
-  --ink: #2a1d1b; --muted: #6b6560;
+  --card: #fbf5e4;
+  --ink: #2e2010; --muted: #6b6560;
   --success-bg: #dcfce7; --success: #166534; --danger: #dc2626;
   --font-head: "Playfair Display", Georgia, serif;
   --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
@@ -35,19 +38,19 @@
   --surface: var(--card);
   --surface-warm: var(--secondary);
   --border: var(--secondary-deep);
-  --ink-soft: #4a3d3a;
+  --ink-soft: #52412b;
   --ink-faint: var(--muted);
 
   --ok: var(--success);
   --ok-bg: var(--success-bg);
-  --danger-bg: #fef2f2;
+  --danger-bg: #fdf1e3;
 
   --font-heading: var(--font-head);
 
   /* Shape */
   --radius: 14px;
   --radius-sm: 8px;
-  --shadow: 0 6px 24px rgba(74, 5, 4, 0.12);
-  --shadow-sm: 0 2px 8px rgba(74, 5, 4, 0.08);
+  --shadow: 0 6px 24px rgba(59, 36, 18, 0.14);
+  --shadow-sm: 0 2px 8px rgba(59, 36, 18, 0.09);
   --container: 1180px;
 }

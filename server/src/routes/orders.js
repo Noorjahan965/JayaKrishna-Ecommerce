@@ -102,8 +102,56 @@ async function placeCod(orderId) {
   }
 }
 
+// Emails the company when an order is placed.
+// It never throws: a failed email must not fail the customer's order.
+async function notifyCompany(orderId, address, items, totalPaise) {
+  const { BREVO_API_KEY, MAIL_FROM, ORDER_NOTIFY_EMAIL } = process.env;
+  if (!BREVO_API_KEY || !MAIL_FROM || !ORDER_NOTIFY_EMAIL) {
+    console.warn("Order email skipped: email settings are missing");
+    return;
+  }
+  try {
+    const itemLines = items
+      .map((i) => `- ${i.name} ${i.size} kg x ${i.qty} = Rs ${(i.unitPaise * i.qty) / 100}`)
+      .join("\n");
+    const text = [
+      `New order #${orderId} (Cash on Delivery)`,
+      "",
+      itemLines,
+      "",
+      `Total: Rs ${totalPaise / 100}`,
+      "",
+      "Deliver to:",
+      address.name,
+      `Phone: ${address.phone}`,
+      address.line1,
+      address.line2 || "",
+      `${address.city}, ${address.state} - ${address.pincode}`,
+    ].join("\n");
+
+    const r = await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: {
+        "api-key": BREVO_API_KEY,
+        "content-type": "application/json",
+        accept: "application/json",
+      },
+      body: JSON.stringify({
+        sender: { name: "Jayakrishna Orders", email: MAIL_FROM },
+        to: [{ email: ORDER_NOTIFY_EMAIL }],
+        subject: `New order #${orderId} (Cash on Delivery)`,
+        textContent: text,
+      }),
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!r.ok) console.error("Order email failed:", r.status, await r.text());
+  } catch (err) {
+    console.error("Order email failed:", err.message);
+  }
+}
+
 // Create an order (and a Razorpay order unless in mock mode). Prices come from the database only.
-router.post("/", async (req, res, next) => {
+  router.post("/", async (req, res, next) => {
   const parsed = orderSchema.safeParse(req.body);
   if (!parsed.success)
     return res
@@ -192,6 +240,7 @@ router.post("/", async (req, res, next) => {
 
     if (paymentMethod === "cod") {
       await placeCod(o.insertId);
+      await notifyCompany(o.insertId, address, items, totalPaise);
       return res
         .status(201)
         .json({ mode: "cod", orderId: o.insertId, amount: totalPaise, currency: "INR" });

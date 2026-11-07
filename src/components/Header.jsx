@@ -49,7 +49,7 @@ export default function Header() {
 			<div className="container header-in">
 				<Link to="/" className="brand" aria-label="Jayakrishna Flour Mill home">
 					<img
-						src="/img/logo.png"
+						src="/e-commerce/img/logo.png"
 						alt="Jayakrishna – Quality lies in Consistency"
 						className="brand-logo"
 					/>
