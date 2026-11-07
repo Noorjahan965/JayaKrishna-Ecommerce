@@ -2,7 +2,7 @@
 // Items marked TODO(client) are sections the guide does not cover.
 
 export const specialties = [
- { title: 'Soft Flaky Paratas', img: '/e-commerce/img/parata.jpg' },
+ { title: 'Soft Flaky Paratas', img: '/e-commerce/img/paratha.png' },
 { title: 'Fresh Sliced Breads', img: '/e-commerce/img/bread.jpg' },
 { title: 'Soft Golden Buns', img: '/e-commerce/img/buns.jpg' },
 { title: 'Flaky Puffs & Layered Pastries', img: '/e-commerce/img/pastry.jpg' },
@@ -36,7 +36,7 @@ export const testimonials = [
 
 export const gallery = [
   ...[
-    ['/e-commerce/img/parata.jpg', 'Soft flaky paratas'],
+    ['/e-commerce/img/paratha.png', 'Soft flaky paratas'],
     ['/e-commerce/img/bread.jpg', 'Fresh sliced bread'],
     ['/e-commerce/img/buns.jpg', 'Soft golden buns'],
     ['/e-commerce/img/pastry.jpg', 'Puffs and layered pastries'],
