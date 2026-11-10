@@ -61,6 +61,7 @@ export const nav = [
       { label: "Annual Report", to: "/annual-report" },
       { label: "Career", to: "/career" },
       { label: "Contact", to: "/contact" },
+      { label: "My Orders", to: "/orders" },
     ],
   },
 ];

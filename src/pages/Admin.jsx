@@ -9,7 +9,7 @@ import { EmptyState, Loading, Notice, Section } from '../components/ui';
 const STATUS_LABEL = {
   pending_payment: 'Awaiting payment',
   paid: 'Placed',
-  packed: 'Confirmed',
+  packed: 'Packed',
   shipped: 'Shipped',
   delivered: 'Delivered',
   cancelled: 'Cancelled',
@@ -23,7 +23,7 @@ const NEXT = {
     delivered: [],
     cancelled: [],
 };
-const ACTION = { packed: 'Confirm order', shipped: 'Mark as shipped', delivered: 'Mark as delivered', cancelled: 'Cancel order' };const when = (d) => (d ? new Date(d).toLocaleString('en-IN') : '');
+const ACTION = { packed: 'Mark as packed', shipped: 'Mark as shipped', delivered: 'Mark as delivered', cancelled: 'Cancel order' };const when = (d) => (d ? new Date(d).toLocaleString('en-IN') : '');
 
 /* ---------- Layout and guard ---------- */
 export function AdminLayout() {
