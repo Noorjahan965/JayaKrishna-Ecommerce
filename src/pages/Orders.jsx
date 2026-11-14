@@ -49,7 +49,7 @@ export default function Orders() {
                 ) : (
                     (orders || []).map((o) => (
                         <div key={o.id} className="card" style={{ marginBottom: 16 }}>
-                            <h3>Order #{o.id} · {STATUS[o.status] || o.status}</h3>
+                            <h3>Order · {STATUS[o.status] || o.status}</h3>
                             <p className="muted">{new Date(o.created_at).toLocaleDateString('en-IN')}</p>
                             <Progress status={o.status} />
                             <ul>
